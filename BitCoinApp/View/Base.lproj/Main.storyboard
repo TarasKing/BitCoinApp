@@ -85,6 +85,11 @@
                             <constraint firstItem="jp6-0G-SbC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pgG-er-gAj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bitcoinLabel" destination="6b1-n4-THI" id="o7n-Q4-zUE"/>
+                        <outlet property="currencyLabel" destination="IhL-nf-hPC" id="Nsl-v4-Q7E"/>
+                        <outlet property="currencyPicker" destination="jp6-0G-SbC" id="Vai-sV-337"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
