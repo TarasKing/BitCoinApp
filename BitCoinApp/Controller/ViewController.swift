@@ -12,6 +12,7 @@ import UIKit
 class ViewController: UIViewController,  UIPickerViewDataSource, UIPickerViewDelegate {
     
     let coinManager = CoinManager()
+    var currencyChoosen: String = ""
     
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var bitcoinLabel: UILabel!
@@ -34,7 +35,8 @@ class ViewController: UIViewController,  UIPickerViewDataSource, UIPickerViewDel
 // this one will be called each time when user scrool the picker and return nubmer of row is selected.
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        coinManager.getCoinPrice(for: coinManager.currencyArray[row])
+        currencyChoosen = coinManager.getCoinPrice(for: coinManager.currencyArray[row])
+        
     }
     
     
