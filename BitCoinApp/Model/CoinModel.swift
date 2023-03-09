@@ -20,22 +20,22 @@ struct CoinModel {
     let Time: String
     
     
-    var rateString: String {
-
-        return String(format: "%.3f", rate)
-    }
-    
-    var carrencyString: String {
-        return String(currencyID)
-    }
-    
-    var bitcoinString: String {
-        return String(bitcoinID)
-    }
-    
-    var timeString: String {
-        return String(Time)
-    }
+//    var rateString: String {
+//
+//        return String(format: "%.3f", rate)
+//    }
+//
+//    var carrencyString: String {
+//        return String(currencyID)
+//    }
+//
+//    var bitcoinString: String {
+//        return String(bitcoinID)
+//    }
+//
+//    var timeString: String {
+//        return String(Time)
+//    }
     
     
     

@@ -10,9 +10,11 @@ import Foundation
 
 // Codable is used when Decodable and Encodable
 
-struct CoinData: Codable {
+import Foundation
+
+struct CoinData: Decodable {
     let rate: Double
-    let currencyID: String
-    let bitcoinID: String
-    let Time: String
+//    let currencyID: String
+//    let bitcoinID: String
+//    let Time: String
 }

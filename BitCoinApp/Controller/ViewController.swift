@@ -9,52 +9,61 @@ import UIKit
 
 
 
-class ViewController: UIViewController,  UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController {
     
-    let coinManager = CoinManager()
-    var currencyChoosen: String = ""
     
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var bitcoinLabel: UILabel!
     @IBOutlet weak var currencyPicker: UIPickerView!
     
+    var coinManager = CoinManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        coinManager.delegate = self
         currencyPicker.dataSource = self
         currencyPicker.delegate = self
     }
-
-//    this is for title of each row
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return coinManager.currencyArray[row]
-    }
-    
-// this one will be called each time when user scrool the picker and return nubmer of row is selected.
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        currencyChoosen = coinManager.getCoinPrice(for: coinManager.currencyArray[row])
-        
-    }
-    
-    
-// this is number of columns in the picker
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    
-// this is number of rows in the picker
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return coinManager.currencyArray.count
-    }
-
-    
-    
 }
+    
+ /// MARK: - CoinManagerDelegate
+    extension ViewController: CoinManagerDelegate {
+        
+        func didUpdatePrice(price: String, currency: String) {
+            
+            DispatchQueue.main.async {
+                self.bitcoinLabel.text = price
+                self.currencyLabel.text = currency
+            }
+        }
+        
+        func didFailWithError(error: Error) {
+            print(error)
+        }
+    }
+    
+    
+    /// MARK: - UIPickerView DataSource and Delegate
+    extension ViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+        
+        func numberOfComponents(in pickerView: UIPickerView) -> Int {
+              return 1
+          }
+          
+          func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+              return coinManager.currencyArray.count
+          }
+          
+          func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+              return coinManager.currencyArray[row]
+          }
+          
+          func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+              let selectedCurrency = coinManager.currencyArray[row]
+              coinManager.getCoinPrice(for: selectedCurrency)
+          }
+    }
+
 
 
